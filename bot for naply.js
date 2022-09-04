@@ -2,16 +2,16 @@
 // @name         New Userscript
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  bot for google
+// @description  robot as
 // @author       Aleksander Scvortsov
-// @match        https://www.google.com/*
+// @match        https://www.google.com/
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
 // ==/UserScript==
 let links = document.links;
-let btnK = document.getElementsByName("BtnK")[0];
-let keywords = ["ispring.ru","проработанный сценарий для урока","Как написать сценарий электронного курса","как писать сценарий к уроку"];
-let keyword = keywords[getRandom(0, keywords.length)];
+let btnK = document.getElementsByName("btnK")[0];
+let keywords = ["Программы для онлайн-обучения iSpring","проработанный сценарий для урока","Как написать сценарий электронного курса","как писать сценарий к уроку"];
+let keyword = keywords[getRandom(0,keywords.length)];
 
 if(btnK !== undefined) {
      document.getElementsByName("q")[0].value = keyword;
