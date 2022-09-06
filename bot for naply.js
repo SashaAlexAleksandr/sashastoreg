@@ -1,32 +1,33 @@
 // ==UserScript==
-// @name         New Userscript
+// @name         rambler 2
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  robot as
+// @description  for rambler
 // @author       Aleksander Scvortsov
-// @match        https://www.google.com/
-// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+// @match        https://r0.ru/*
+// @icon         [eq
 // @grant        none
 // ==/UserScript==
-let links = document.links;
-let btnK = document.getElementsByName("btnK")[0];
-let keywords = ["Программы для онлайн-обучения iSpring","проработанный сценарий для урока","Как написать сценарий электронного курса","как писать сценарий к уроку"];
-let keyword = keywords[getRandom(0,keywords.length)];
 
-if(btnK !== undefined) {
-     document.getElementsByName("q")[0].value = keyword;
-     btnK.click();
+let links = document.links;
+let rui = document.getElementsByClassName("rui__K3edI rui__3Mzuh")[0];
+let keywords = ["10 известных фильмов Голливуда","10 известных актеров Голливуда","онлайн-кинотеатр"];
+let keyword = keywords[getRandom(0, keywords.length)];
+
+if (rui !== undefined) {
+     document.getElementsByName("query")[0].value = keyword;
+     rui.click();
 } else {
 
-for(let i=0; i<links.length; i++) {
-     if(links[i].href.indexOf("ispring.ru")!== -1){
-          console.log("Нашел строку"+ links[i]);
+for (let i=0; i<links.length; i++) {
+     if (links[i].href.indexOf("okko.tv") !== -1) {
+          console.log("Нашел строку" + links[i]);
           let link = links[i];
           link.click();
           break;
-     }
+    }
+  }
 }
-}
-function getRandom(min, max){
-return Math.floor(Math.random()*(max - min)+ min);
+function getRandom(min, max) {
+     return Math.floor(Math.random()*(max-min)+min);
 }
