@@ -1,0 +1,18 @@
+		static function authUser($email,$pass){
+            global $mysqli;
+
+            $email = trim(mb_strtolower($email));
+            $pass = trim($pass);
+
+            $result = $mysqli->query("SELECT*FROM`users`WHERE`email`='$email'");
+            $result = $result->fetch_assoc(); 
+            
+            if (password_verify($pass, $result["pass"])){
+                    $_SESSION["id"]=$result["id"];
+                    return json_encode(["result"=>"authorized"]);
+            }else{
+                return json_encode(["result"=>"rejected"]);
+            }
+        }
+}
+тоже самое что на уроке
