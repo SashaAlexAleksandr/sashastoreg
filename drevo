@@ -1,0 +1,115 @@
+<?php
+
+interface IFamily
+{
+  public function setFirstName($fistName);
+  public function getFirstName();
+  public function setLastName($lastName);
+  public function getLastName();
+  public function setAge($age);
+  public function getAge();
+  public function setMother($mother);
+  public function getMother();
+  public function setFather($father);
+  public function getFather();
+}
+class Person implements IFamily
+{
+  private $firstName;
+  private $lastName;
+  private $age;
+  private $mother;
+  private $father;
+  private $hp;
+
+  function __construct($firstName, $lastName, $age, $mother = null, $father = null)
+  {
+    $this->setFirstName($firstName);
+    $this->setLastName($lastName);
+    $this->setAge($age);
+    $this->setMother($mother);
+    $this->setFather($father);
+    $this->hp = 100;
+  }
+  function setFirstName($firstName)
+  {
+    $this->firstName = $firstName;
+  }
+  function getFirstName()
+  {
+    return $this->firstName;
+  }
+  function setLastName($lastName)
+  {
+    $this->lastName = $lastName;
+  }
+  function getLastName()
+  {
+    return $this->lastName;
+  }
+  function setAge($age)
+  {
+    $this->age = $age > 110 ? 110 : $age;
+  }
+  function getAge()
+  {
+    return $this->age;
+  }
+  function setMother($mother)
+  {
+    if ($mother instanceof IFamily or $mother != null) {
+      $this->mother = $mother;
+    }
+  }
+  function getMother()
+  {
+    return $this->mother;
+  }
+  function setFather($father)
+  {
+    if ($father instanceof IFamily or $father != null) {
+      $this->father = $father;
+    }
+  }
+  function getFather()
+  {
+    return $this->father;
+  }
+  function getHp()
+  {
+    return $this->hp;
+  }
+  function getFullName()
+  {
+    return $this->firstName . ", " . $this->lastName;
+  }
+}
+
+
+$gfEgor = new Person("Егор", "Потапов", 70);
+$gmOlga = new Person("Ольга", "Потапова", 67);
+
+$gfNikolay = new Person("Николай", "Воробьёв", 79);
+$gmLudmila = new Person("Людмила", "Воробьёва", 74);
+
+$fSergey = new Person("Сергей", "Воробьёв", 51, $gmLudmila, $gfNikolay);
+$mElena = new Person("Елена", "Воробьёва", 49, $gmOlga, $gfEgor);
+
+$sALeksandr = new Person("Александр", "Воробьёв", 28, $mElena, $fSergey);
+
+echo "Привет! Меня зовут " . $sALeksandr->getFullName() .
+  ". Мне " . $sALeksandr->getAge() . " лет.<br>";
+echo "У меня есть мама и папа. Маму зовут " . $sALeksandr->getMother()->getFullName() . 
+". Ей " . $mElena->getAge() . " лет.<br>";
+echo "Папу зовут " . $sALeksandr->getFather()->getFullName() .
+". Ему " . $fSergey->getAge() . " год.<br>";
+echo "У меня есть бабушка и дедушка - мамины родители. Бабушку зовут " .
+  $sALeksandr->getMother()->getMother()->getFullName() . 
+  ". Ей " . $gmOlga->getAge() . " лет.<br>";
+echo "Дедушку зовут " . $sALeksandr->getMother()->getFather()->getFullName() . 
+". Ему " . $gfEgor->getAge() . " лет.<br>";
+echo "Еще у меня есть бабушка и дедушка - папины родители. Бабушку зовут " .
+  $sALeksandr->getFather()->getMother()->getFullName() .
+  ". Ей " . $gmLudmila->getAge() . " года.<br>";
+echo "Дедушку зовут " . $sALeksandr->getFather()->getFather()->getFullName() .
+". Ему " . $gfNikolay->getAge() . " лет.<br>";
